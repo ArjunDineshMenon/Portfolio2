@@ -1,0 +1,11 @@
+# Blender and local editor scratch files
+*.blend1
+*.blend2
+*.tmp
+*.swp
+__pycache__/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
