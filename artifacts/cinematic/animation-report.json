@@ -1,0 +1,29 @@
+{
+  "added": [
+    "Panel_Slash_Left",
+    "Panel_Slash_Right",
+    "Walk_Travel_Loop",
+    "Portal_Entry",
+    "Portal_Landing"
+  ],
+  "clips": [
+    "Closing_Bow",
+    "Draw_Katana",
+    "Enter_From_Shadow",
+    "Hologram_Slice",
+    "Idle_Breathing",
+    "Panel_Reveal_Left",
+    "Panel_Reveal_Right",
+    "Panel_Slash_Left",
+    "Panel_Slash_Right",
+    "Portal_Brace",
+    "Portal_Entry",
+    "Portal_Landing",
+    "Recover_From_Slice",
+    "Sheathe_Katana",
+    "Walk_Forward_Loop",
+    "Walk_Travel_Loop"
+  ],
+  "bytes": 3455076,
+  "preserved_master": "artifacts/rigging/samurai-production.blend"
+}

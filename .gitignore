@@ -9,3 +9,12 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
+# Website build and local verification
+node_modules/
+dist/
+.tools/
+test-results/
+playwright-report/
+*.log
+*.tsbuildinfo
+

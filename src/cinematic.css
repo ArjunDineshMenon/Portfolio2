@@ -1,0 +1,924 @@
+.is-cinematic main {
+  pointer-events: none;
+}
+.is-cinematic main .section-sticky {
+  display: none !important;
+}
+.is-cinematic .world-grain {
+  opacity: 0.037;
+}
+.is-cinematic .world:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 45%,
+    transparent 37%,
+    #02081177 100%
+  );
+  z-index: 2;
+}
+.is-cinematic .site-header {
+  height: 100px;
+  background: linear-gradient(#030a12bd, transparent);
+}
+.is-cinematic .header-edition {
+  font-size: 8px;
+}
+.is-cinematic .site-header nav {
+  font-size: 11px;
+}
+.is-cinematic .journey-controls {
+  background: linear-gradient(transparent, #030b14cf);
+}
+.cinema-surface {
+  position: relative;
+  --unseal: 1;
+  --cut: 0;
+  --impact: 0;
+  width: 490px;
+  opacity: 0;
+}
+.cinema-sheet {
+  position: relative;
+  width: 100%;
+  padding: 23px 32px 20px;
+  max-height: calc(100svh - 190px);
+  overflow: auto;
+  border: 1px solid #83c6cd6e;
+  background: linear-gradient(120deg, #081924f5, #0a1b29de 68%, #122936ed);
+  box-shadow:
+    0 0 60px #45cddd09,
+    inset 0 0 44px #5486a010;
+  backdrop-filter: blur(12px);
+  clip-path: polygon(
+    0 calc(var(--unseal) * 48%),
+    100% calc(var(--unseal) * 44%),
+    100% calc(100% - var(--unseal) * 48%),
+    0 calc(100% - var(--unseal) * 44%)
+  );
+  color: #e9f0ed;
+}
+.cinema-primary {
+  opacity: clamp(0, calc(1 - var(--cut) * 50), 1);
+}
+.cinema-fragment {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: clamp(0, calc(var(--cut) * 50), 1);
+  filter: blur(calc(var(--cut) * 4px));
+}
+.cinema-fragment-upper {
+  clip-path: polygon(-50% -50%, 150% -50%, 150% 40%, -50% 60%);
+  transform: translate(calc(var(--cut) * 100px), calc(var(--cut) * -35px))
+    rotate(calc(var(--cut) * 8deg));
+}
+.cinema-fragment-lower {
+  clip-path: polygon(-50% 60%, 150% 40%, 150% 150%, -50% 150%);
+  transform: translate(calc(var(--cut) * -95px), calc(var(--cut) * 48px))
+    rotate(calc(var(--cut) * -7deg));
+}
+.cinema-sheet:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 45px;
+  height: 2px;
+  background: #c1fbff;
+  box-shadow: 0 0 14px #97e8ef88;
+}
+.cinema-sheet:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 4px,
+    #68bcc603 4px 5px
+  );
+}
+.cinema-sheet:focus-visible {
+  outline: 2px solid #c1f5f5;
+  outline-offset: 5px;
+}
+.cinema-sheet-header,
+.cinema-sheet-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 7px;
+  letter-spacing: 0.18em;
+  color: #a0c2c9;
+}
+.cinema-sheet-header {
+  padding-bottom: 18px;
+  border-bottom: 1px solid #86cad529;
+  margin-bottom: 23px;
+}
+.cinema-sheet-footer {
+  margin-top: 23px;
+  padding-top: 15px;
+  border-top: 1px solid #86cad529;
+  color: #85a7b0;
+  font-size: 6px;
+}
+.cinema-overline {
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  color: #a7dadf;
+  margin-bottom: 18px;
+}
+.cinema-sheet h2 {
+  font-size: 43px;
+  line-height: 1.03;
+  letter-spacing: -0.055em;
+  margin-bottom: 22px;
+}
+.cinema-sheet h2 em {
+  color: #b8dcd8;
+}
+.cinema-sheet > p {
+  font-size: 12px;
+  line-height: 1.85;
+  color: #cad7dc;
+}
+.cinema-sheet .cinema-subtitle {
+  font-size: 10px;
+  color: #a8c0c8;
+  margin-top: -9px;
+}
+.cinema-facts {
+  display: grid;
+  gap: 17px;
+  border-top: 1px solid #85bfd42d;
+  margin-top: 23px;
+  padding-top: 20px;
+}
+.cinema-facts > span {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.cinema-facts small {
+  display: block;
+  font-size: 9px;
+  line-height: 1.7;
+  color: #9db7c1;
+  margin-top: 3px;
+}
+.cinema-symbol {
+  float: right;
+  font-size: 35px;
+  line-height: 1;
+  color: #91d0d6;
+  font-family: serif;
+}
+.cinema-stack {
+  margin-top: 27px;
+}
+.cinema-stack h3 {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 7px;
+  letter-spacing: 0.12em;
+  color: #bfd8da;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 19px 0 12px;
+}
+.cinema-stack h3 i {
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background: #ade7d8;
+  box-shadow: 0 0 9px #93e5da55;
+}
+.cinema-stack h3.learning i {
+  background: none;
+  border: 1px solid #9aaab8;
+}
+.cinema-stack ul,
+.cinema-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.cinema-stack li {
+  font-size: 12px;
+  padding: 8px 12px;
+  border: 1px solid #91cbd445;
+  background: #98b7c20d;
+}
+.cinema-stack .learning li {
+  color: #adc1cc;
+  border-style: dashed;
+  background: none;
+}
+.cinema-architecture {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 22px 20px;
+  margin-bottom: 19px;
+  border-bottom: 1px solid #86cad529;
+}
+.cinema-architecture span {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 6px;
+  letter-spacing: 0.07em;
+  color: #b2c9d3;
+}
+.cinema-architecture b {
+  font-weight: 400;
+  font-size: 32px;
+  width: 55px;
+  height: 55px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #91cdda45;
+  transform: rotate(-9deg);
+}
+.cinema-architecture span:not(:last-child):after {
+  content: "";
+  position: absolute;
+  left: 70px;
+  top: 28px;
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, #79c6d766, transparent);
+}
+.cinema-status {
+  display: block;
+  font-size: 8px;
+  line-height: 1.6;
+  color: #cfba98;
+  margin-bottom: 12px;
+}
+.cinema-project h2 {
+  font-size: 32px;
+  line-height: 1.14;
+  margin-bottom: 18px;
+}
+.cinema-tags {
+  border-top: 1px solid #86cad529;
+  margin-top: 21px;
+  padding-top: 15px;
+  gap: 7px 16px;
+}
+.cinema-tags li {
+  font-size: 8px;
+  color: #b3d3d9;
+}
+.cinema-link {
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 17px;
+}
+.cinema-link span {
+  color: #9acfd8;
+}
+.cinema-milestones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+.cinema-milestones article > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid #85bfd442;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+.cinema-milestones b {
+  font-size: 29px;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+}
+.cinema-milestones span {
+  font-size: 6px;
+  text-transform: uppercase;
+  color: #a3c0c9;
+}
+.cinema-milestones h3 {
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.cinema-milestones p {
+  font-size: 10px;
+  line-height: 1.8;
+  color: #b6cbd4;
+}
+.cinema-education h2,
+.cinema-certifications h2 {
+  font-size: 37px;
+}
+.cinema-education article + article {
+  margin-top: 15px;
+  padding-top: 13px;
+  border-top: 1px solid #85bfd42d;
+}
+.cinema-education article > span {
+  font-size: 7px;
+  letter-spacing: 0.1em;
+  color: #a3c0c9;
+}
+.cinema-education h3 {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 5px 0;
+}
+.cinema-education p {
+  font-size: 10px;
+  line-height: 1.7;
+  color: #afc5ce;
+}
+.cinema-grades {
+  display: flex;
+  gap: 40px;
+  margin-top: 14px;
+}
+.cinema-grades b {
+  font-weight: 400;
+  font-size: 26px;
+  letter-spacing: -0.06em;
+}
+.cinema-grades small {
+  display: block;
+  font-size: 6px;
+  letter-spacing: 0.02em;
+  color: #afc5ce;
+  margin-top: 3px;
+}
+ul.cinema-certifications {
+  margin-top: 20px;
+}
+.cinema-certifications li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid #85bfd42d;
+  padding: 12px 0;
+  font-size: 10px;
+}
+.cinema-certifications small {
+  display: block;
+  font-size: 8px;
+  color: #99b4c0;
+  margin-top: 4px;
+}
+.cinema-certifications b {
+  font-size: 7px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #bacacb;
+  white-space: nowrap;
+}
+.movie-title {
+  position: absolute;
+  left: 8.4%;
+  top: 28%;
+  width: 45%;
+  pointer-events: none;
+  color: #f0f0e9;
+  text-shadow: 0 2px 28px #020a14a6;
+}
+.movie-kicker {
+  font-size: 9px;
+  letter-spacing: 0.21em;
+  color: #bdd9dc;
+  margin-bottom: 25px;
+}
+.movie-intro h1 {
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  font-size: clamp(70px, 8vw, 120px);
+  line-height: 0.93;
+}
+.movie-intro h1 em {
+  color: #d7e8e1;
+  font-size: 1.12em;
+}
+.movie-role {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #c2d3db;
+  margin-top: 29px;
+}
+.movie-opening {
+  top: auto;
+  bottom: 19%;
+  width: 83.2%;
+}
+.movie-opening .movie-kicker {
+  font-size: 8px;
+  margin-bottom: 16px;
+}
+.movie-begin {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+.movie-begin b {
+  font-weight: 400;
+  font-size: 23px;
+}
+.movie-japanese {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: #a4bec3;
+  white-space: nowrap;
+}
+.movie-arrival {
+  top: 30%;
+  max-width: 430px;
+}
+.movie-bio {
+  font-size: clamp(22px, 2.45vw, 34px);
+  line-height: 1.42;
+  letter-spacing: -0.025em;
+}
+.movie-bio em {
+  color: #c4e0dc;
+}
+.movie-portal,
+.movie-return {
+  left: 0;
+  top: auto;
+  bottom: 20%;
+  width: 100%;
+  text-align: center;
+}
+.movie-caption {
+  font-size: clamp(30px, 4vw, 59px);
+  letter-spacing: -0.05em;
+  line-height: 1.15;
+}
+.movie-caption em {
+  color: #cbede8;
+}
+.movie-bow {
+  top: 31%;
+}
+.movie-thanks {
+  font-size: clamp(50px, 6.6vw, 95px);
+  letter-spacing: -0.055em;
+  line-height: 1.04;
+}
+.movie-bow > span {
+  display: block;
+  margin-top: 27px;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: #bdd5d5;
+}
+.movie-contact {
+  top: 23%;
+  width: 55%;
+  max-width: 780px;
+}
+.movie-contact h2 {
+  font-size: clamp(65px, 8vw, 118px);
+}
+.movie-contact-copy {
+  max-width: 460px;
+  font-size: 13px;
+  line-height: 1.9;
+  margin-top: 25px;
+  color: #c0d0d6;
+}
+.movie-email {
+  display: flex;
+  gap: 35px;
+  width: max-content;
+  align-items: center;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  margin-top: 27px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #a0c4cb4d;
+}
+.movie-email span {
+  color: #9eced5;
+}
+.movie-contact-links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  margin-top: 25px;
+  font-size: 11px;
+}
+.movie-contact-links a:last-child {
+  padding: 13px 18px;
+  border: 1px solid #a0c4cb59;
+}
+.movie-copyright {
+  font-size: 7px;
+  color: #8ba6b0;
+  letter-spacing: 0.12em;
+  margin-top: 45px;
+}
+@media (min-width: 1650px) {
+  .cinema-surface {
+    width: 550px;
+  }
+  .cinema-sheet {
+    padding: 27px 37px 22px;
+  }
+  .cinema-sheet > p {
+    font-size: 14px;
+  }
+  .cinema-sheet h2 {
+    font-size: 49px;
+  }
+  .cinema-project h2 {
+    font-size: 35px;
+  }
+  .cinema-milestones p {
+    font-size: 12px;
+  }
+}
+@media (max-height: 740px) and (min-width: 761px) {
+  .cinema-surface {
+    width: 430px;
+  }
+  .cinema-sheet {
+    padding: 18px 25px 16px;
+  }
+  .cinema-sheet h2 {
+    font-size: 35px;
+    margin-bottom: 17px;
+  }
+  .cinema-sheet > p {
+    font-size: 11px;
+  }
+  .cinema-sheet-header {
+    margin-bottom: 17px;
+    padding-bottom: 12px;
+  }
+  .cinema-sheet-footer {
+    margin-top: 16px;
+  }
+  .cinema-project h2 {
+    font-size: 27px;
+  }
+  .cinema-architecture {
+    padding-bottom: 13px;
+    margin-bottom: 13px;
+  }
+  .cinema-contact {
+    top: 20%;
+  }
+  .movie-contact h2 {
+    font-size: 75px;
+  }
+  .movie-copyright {
+    margin-top: 24px;
+  }
+}
+@media (max-width: 1100px) and (min-width: 761px) {
+  .cinema-surface {
+    width: 390px;
+  }
+  .cinema-sheet h2 {
+    font-size: 36px;
+  }
+  .cinema-project h2 {
+    font-size: 27px;
+  }
+  .cinema-sheet {
+    padding: 20px 25px;
+  }
+  .movie-title {
+    left: 6%;
+  }
+  .movie-arrival {
+    max-width: 330px;
+  }
+  .movie-bio {
+    font-size: 26px;
+  }
+}
+@media (max-width: 760px) {
+  .is-cinematic .site-header {
+    height: 82px;
+  }
+  .is-cinematic .brand > span {
+    font-size: 10px;
+  }
+  .cinema-surface {
+    width: calc(100vw - 42px);
+    max-width: 410px;
+  }
+  .cinema-sheet {
+    padding: 16px 20px 14px;
+    max-height: 43svh;
+    overflow: auto;
+    backdrop-filter: blur(8px);
+  }
+  .cinema-sheet-header {
+    font-size: 5px;
+    padding-bottom: 10px;
+    margin-bottom: 13px;
+  }
+  .cinema-overline {
+    font-size: 6px;
+    margin-bottom: 11px;
+  }
+  .cinema-sheet h2 {
+    font-size: 32px;
+    line-height: 1.05;
+    margin-bottom: 15px;
+  }
+  .cinema-sheet > p {
+    font-size: 10px;
+    line-height: 1.75;
+  }
+  .cinema-sheet .cinema-subtitle {
+    font-size: 9px;
+    margin-top: -5px;
+  }
+  .cinema-facts {
+    gap: 11px;
+    margin-top: 15px;
+    padding-top: 13px;
+  }
+  .cinema-facts > span {
+    font-size: 10px;
+  }
+  .cinema-facts small {
+    font-size: 8px;
+  }
+  .cinema-sheet-footer {
+    margin-top: 15px;
+    padding-top: 11px;
+    font-size: 5px;
+  }
+  .cinema-stack {
+    margin-top: 19px;
+  }
+  .cinema-stack h3 {
+    font-size: 6px;
+    margin: 14px 0 9px;
+  }
+  .cinema-stack li {
+    font-size: 10px;
+    padding: 6px 9px;
+  }
+  .cinema-symbol {
+    font-size: 26px;
+  }
+  .cinema-architecture {
+    padding: 0 16px 12px;
+    margin-bottom: 13px;
+  }
+  .cinema-architecture b {
+    font-size: 22px;
+    width: 38px;
+    height: 38px;
+  }
+  .cinema-architecture span {
+    font-size: 5px;
+    gap: 9px;
+  }
+  .cinema-architecture span:not(:last-child):after {
+    left: 47px;
+    top: 20px;
+    width: 33px;
+  }
+  .cinema-project h2 {
+    font-size: 24px;
+    line-height: 1.1;
+  }
+  .cinema-status {
+    font-size: 7px;
+    margin-bottom: 9px;
+  }
+  .cinema-tags {
+    margin-top: 14px;
+    padding-top: 12px;
+    gap: 7px 12px;
+  }
+  .cinema-tags li {
+    font-size: 7px;
+  }
+  .cinema-link {
+    font-size: 9px;
+    padding-top: 12px;
+  }
+  .cinema-milestones {
+    gap: 18px;
+  }
+  .cinema-milestones b {
+    font-size: 24px;
+  }
+  .cinema-milestones span {
+    font-size: 5px;
+  }
+  .cinema-milestones h3 {
+    font-size: 11px;
+  }
+  .cinema-milestones p {
+    font-size: 9px;
+    line-height: 1.7;
+  }
+  .cinema-milestones article > div {
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+  .cinema-education h3 {
+    font-size: 10px;
+  }
+  .cinema-education p {
+    font-size: 8px;
+  }
+  .cinema-education article + article {
+    margin-top: 10px;
+    padding-top: 8px;
+  }
+  .cinema-grades {
+    margin-top: 9px;
+  }
+  .cinema-grades b {
+    font-size: 22px;
+  }
+  ul.cinema-certifications {
+    margin-top: 13px;
+  }
+  .cinema-certifications li {
+    font-size: 9px;
+    padding: 9px 0;
+  }
+  .cinema-certifications small {
+    font-size: 7px;
+  }
+  .cinema-certifications b {
+    font-size: 6px;
+  }
+  .movie-title {
+    left: 7%;
+    width: 86%;
+  }
+  .movie-opening {
+    bottom: 18%;
+    top: auto;
+  }
+  .movie-opening .movie-kicker {
+    font-size: 6px;
+  }
+  .movie-begin {
+    font-size: 11px;
+  }
+  .movie-japanese {
+    right: 0;
+    bottom: -50px;
+    font-size: 9px;
+  }
+  .movie-intro {
+    top: 58%;
+  }
+  .movie-intro h1 {
+    font-size: 65px;
+  }
+  .movie-intro h1 br {
+    display: none;
+  }
+  .movie-kicker {
+    font-size: 7px;
+    margin-bottom: 18px;
+  }
+  .movie-role {
+    font-size: 12px;
+    margin-top: 18px;
+  }
+  .movie-arrival {
+    top: auto;
+    bottom: 18%;
+    max-width: 290px;
+  }
+  .movie-bio {
+    font-size: 21px;
+    line-height: 1.42;
+  }
+  .movie-arrival .movie-kicker {
+    font-size: 6px;
+  }
+  .movie-portal,
+  .movie-return {
+    left: 7%;
+    width: 86%;
+    bottom: 18%;
+  }
+  .movie-caption {
+    font-size: 34px;
+  }
+  .movie-bow {
+    top: 17%;
+  }
+  .movie-thanks {
+    font-size: 45px;
+  }
+  .movie-bow > span {
+    font-size: 8px;
+    margin-top: 18px;
+  }
+  .movie-contact {
+    top: 24%;
+    width: 86%;
+  }
+  .movie-contact h2 {
+    font-size: 61px;
+  }
+  .movie-contact-copy {
+    font-size: 11px;
+    line-height: 1.8;
+    margin-top: 22px;
+  }
+  .movie-email {
+    font-size: 12px;
+    gap: 20px;
+    margin-top: 22px;
+    padding-bottom: 15px;
+  }
+  .movie-contact-links {
+    font-size: 9px;
+    gap: 19px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .movie-contact-links a:last-child {
+    padding: 12px;
+  }
+  .movie-copyright {
+    font-size: 6px;
+    margin-top: 30px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cinema-sheet {
+    filter: none;
+    transform: none;
+  }
+}
+@media (max-height: 600px) and (min-width: 761px) {
+  .movie-title {
+    top: 25%;
+  }
+  .movie-intro h1 {
+    font-size: 56px;
+  }
+  .movie-role {
+    font-size: 12px;
+    margin-top: 16px;
+  }
+  .movie-kicker {
+    margin-bottom: 14px;
+  }
+  .movie-opening,
+  .movie-portal,
+  .movie-return {
+    top: auto;
+    bottom: 21%;
+  }
+  .movie-contact {
+    top: 22%;
+    max-height: 64svh;
+    overflow: auto;
+    pointer-events: auto;
+  }
+  .movie-contact h2 {
+    font-size: 48px;
+  }
+  .movie-contact-copy {
+    font-size: 11px;
+    margin-top: 14px;
+  }
+  .movie-email {
+    font-size: 13px;
+    margin-top: 14px;
+    padding-bottom: 12px;
+  }
+  .movie-contact-links {
+    margin-top: 15px;
+  }
+  .movie-copyright {
+    margin-top: 20px;
+  }
+}

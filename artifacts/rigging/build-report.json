@@ -1,0 +1,622 @@
+{
+  "source_sha256": "86947fcec6761fa25e0feb9f88eaf92abb2cbd3fe0ca3c21969c233f6f5044e8",
+  "source_unchanged": true,
+  "triangles": 95169,
+  "bones": 21,
+  "clips": {
+    "Idle_Breathing": 3.2,
+    "Enter_From_Shadow": 2.0,
+    "Draw_Katana": 2.0,
+    "Hologram_Slice": 1.3,
+    "Recover_From_Slice": 0.9,
+    "Walk_Forward_Loop": 1.6,
+    "Panel_Reveal_Left": 2.4,
+    "Panel_Reveal_Right": 2.4,
+    "Portal_Brace": 2.0,
+    "Sheathe_Katana": 2.2,
+    "Closing_Bow": 3.0
+  },
+  "output_bytes": 3372788,
+  "skinning": [
+    {
+      "mesh": "Object_2",
+      "material": "Blade_base",
+      "weapon": true,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_3",
+      "material": "Ears",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_4",
+      "material": "EyeMoisture_Genesis_8_Female_Eyelashes",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_5",
+      "material": "EyeSocket",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_6",
+      "material": "Eyelashes",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_7",
+      "material": "Face",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_8",
+      "material": "Grip_End",
+      "weapon": true,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_9",
+      "material": "Hair01",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_10",
+      "material": "Hair02",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_11",
+      "material": "Hair02",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_12",
+      "material": "Hair03",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_13",
+      "material": "Hamdle",
+      "weapon": true,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_14",
+      "material": "Lips",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_15",
+      "material": "Scabbard",
+      "weapon": false,
+      "sheath": true
+    },
+    {
+      "mesh": "Object_16",
+      "material": "Side_Ring",
+      "weapon": false,
+      "sheath": true
+    },
+    {
+      "mesh": "Object_17",
+      "material": "Top_Ring",
+      "weapon": false,
+      "sheath": true
+    },
+    {
+      "mesh": "Object_18",
+      "material": "Wrappings",
+      "weapon": false,
+      "sheath": true
+    },
+    {
+      "mesh": "Object_19",
+      "material": "01_Haori_Inner_Neck",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_20",
+      "material": "01_Haori_Main",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_21",
+      "material": "01_Haori_Main",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_22",
+      "material": "01_Haori_Main",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_23",
+      "material": "01_Haori_Main",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_24",
+      "material": "01_Haori_Main",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_25",
+      "material": "01_Haori_Main",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_26",
+      "material": "01_Haori_Main",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_27",
+      "material": "01_Haori_Outer_Neck",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_28",
+      "material": "01_Harness",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_29",
+      "material": "01_Harness",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_30",
+      "material": "02_Hakama_Main",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_31",
+      "material": "02_Hakama_Main",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_32",
+      "material": "02_Hakama_Main",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_33",
+      "material": "02_Hakama_Main",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_34",
+      "material": "02_Hakama_Main",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_35",
+      "material": "02_Hakama_Obi_Belt",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_36",
+      "material": "02_Hakama_Obi_Belt",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_37",
+      "material": "06_Tabi_Socks",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_38",
+      "material": "06_Waraji_Sandals",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_39",
+      "material": "06_Waraji_Sandals",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_40",
+      "material": "Arms",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_41",
+      "material": "Arms",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_42",
+      "material": "Back",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_43",
+      "material": "Back",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_44",
+      "material": "Back",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_45",
+      "material": "Back",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_46",
+      "material": "Back",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_47",
+      "material": "Back",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_48",
+      "material": "Back",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_49",
+      "material": "Back",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_50",
+      "material": "BackUnder",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_51",
+      "material": "BackUnder",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_52",
+      "material": "BackUnder",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_53",
+      "material": "BackUnder",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_54",
+      "material": "BackUnder",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_55",
+      "material": "BackUnder",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_56",
+      "material": "BackUnder",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_57",
+      "material": "BackUnder",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_58",
+      "material": "Bangs1",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_59",
+      "material": "Bangs1",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_60",
+      "material": "Bangs2",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_61",
+      "material": "Bangs2",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_62",
+      "material": "Blade",
+      "weapon": true,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_63",
+      "material": "material",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_64",
+      "material": "material",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_65",
+      "material": "ClothStrip1",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_66",
+      "material": "ClothStrip2",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_67",
+      "material": "Cornea",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_68",
+      "material": "Crossguard",
+      "weapon": true,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_69",
+      "material": "EyeMoisture",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_70",
+      "material": "Fingernails",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_71",
+      "material": "Front1",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_72",
+      "material": "Front1",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_73",
+      "material": "Front1",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_74",
+      "material": "Front1",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_75",
+      "material": "Front1",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_76",
+      "material": "Front2",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_77",
+      "material": "Front2",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_78",
+      "material": "Front2",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_79",
+      "material": "Front2",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_80",
+      "material": "Front2",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_81",
+      "material": "Grip_Ring",
+      "weapon": true,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_82",
+      "material": "Handle_Wrappings",
+      "weapon": true,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_83",
+      "material": "Handle_Wrappings",
+      "weapon": true,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_84",
+      "material": "Irises",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_85",
+      "material": "Legs",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_86",
+      "material": "Legs",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_87",
+      "material": "Mouth",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_88",
+      "material": "Pupils",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_89",
+      "material": "Sclera",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_90",
+      "material": "Side1",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_91",
+      "material": "Side1",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_92",
+      "material": "Side1",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_93",
+      "material": "Side1",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_94",
+      "material": "Side2",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_95",
+      "material": "Side2",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_96",
+      "material": "Side2",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_97",
+      "material": "Side2",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_98",
+      "material": "Teeth",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_99",
+      "material": "Toenails",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_100",
+      "material": "Torso",
+      "weapon": false,
+      "sheath": false
+    },
+    {
+      "mesh": "Object_101",
+      "material": "Torso",
+      "weapon": false,
+      "sheath": false
+    }
+  ]
+}

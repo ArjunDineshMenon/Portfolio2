@@ -1,0 +1,68 @@
+{
+  "clips": {
+    "Draw_Katana": {
+      "root_translation_delta": 0
+    },
+    "Walk_Forward_Loop": {
+      "root_translation_delta": 0,
+      "loop_or_neutral_seam": 0.0
+    },
+    "Portal_Entry": {
+      "root_translation_delta": 0,
+      "loop_or_neutral_seam": 0.0
+    },
+    "Closing_Bow": {
+      "root_translation_delta": 0,
+      "loop_or_neutral_seam": 0.0,
+      "foot_drift_m": 0.015222292212426913,
+      "head_drop_m": 0.11067342758178711
+    },
+    "Enter_From_Shadow": {
+      "root_translation_delta": 0
+    },
+    "Panel_Slash_Left": {
+      "root_translation_delta": 0,
+      "loop_or_neutral_seam": 0.0
+    },
+    "Hologram_Slice": {
+      "root_translation_delta": 0
+    },
+    "Panel_Slash_Right": {
+      "root_translation_delta": 0,
+      "loop_or_neutral_seam": 0.0
+    },
+    "Panel_Reveal_Left": {
+      "root_translation_delta": 0,
+      "loop_or_neutral_seam": 0.0
+    },
+    "Recover_From_Slice": {
+      "root_translation_delta": 0
+    },
+    "Sheathe_Katana": {
+      "root_translation_delta": 0
+    },
+    "Idle_Breathing": {
+      "root_translation_delta": 0,
+      "loop_or_neutral_seam": 0.0
+    },
+    "Walk_Travel_Loop": {
+      "root_translation_delta": 0,
+      "loop_or_neutral_seam": 0.0
+    },
+    "Portal_Landing": {
+      "root_translation_delta": 0,
+      "loop_or_neutral_seam": 0.0
+    },
+    "Portal_Brace": {
+      "root_translation_delta": 0,
+      "loop_or_neutral_seam": 0.0
+    },
+    "Panel_Reveal_Right": {
+      "root_translation_delta": 0,
+      "loop_or_neutral_seam": 0.0
+    }
+  },
+  "unweighted_vertices": 0,
+  "skin_meshes": 1,
+  "bones": 20
+}
