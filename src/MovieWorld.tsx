@@ -3,6 +3,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { direct } from "./director";
+import { SakuraTree, Temple } from "./SceneLife";
 const base = import.meta.env.BASE_URL;
 
 function Lantern({ position }: { position: [number, number, number] }) {
@@ -46,12 +47,6 @@ function Lantern({ position }: { position: [number, number, number] }) {
         <sphereGeometry args={[0.055, 8, 8]} />
         <meshStandardMaterial color="#131d23" />
       </mesh>
-      <pointLight
-        color="#ffb65e"
-        intensity={3.5}
-        distance={4.5}
-        position={[0, 1, 0]}
-      />
     </group>
   );
 }
@@ -63,7 +58,7 @@ function Gate({ z, scale = 1 }: { z: number; scale?: number }) {
           <mesh position={[0, 2.4, 0]} rotation={[0, 0, -s * 0.022]}>
             <cylinderGeometry args={[0.23, 0.3, 4.8, 12]} />
             <meshStandardMaterial
-              color="#1b252b"
+              color="#b94742"
               roughness={0.58}
               metalness={0.22}
             />
@@ -76,15 +71,15 @@ function Gate({ z, scale = 1 }: { z: number; scale?: number }) {
       ))}
       <mesh position={[0, 4.6, 0]}>
         <boxGeometry args={[9.8, 0.28, 0.45]} />
-        <meshStandardMaterial color="#19242b" metalness={0.3} roughness={0.5} />
+        <meshStandardMaterial color="#4d5558" metalness={0.1} roughness={0.8} />
       </mesh>
       <mesh position={[0, 3.65, 0]}>
         <boxGeometry args={[9, 0.22, 0.3]} />
-        <meshStandardMaterial color="#273239" />
+        <meshStandardMaterial color="#b94742" />
       </mesh>
       <mesh position={[0, 4.1, 0]}>
         <boxGeometry args={[0.24, 0.9, 0.28]} />
-        <meshStandardMaterial color="#222d34" />
+        <meshStandardMaterial color="#b94742" />
       </mesh>
       {[-1, 1].map((s) => (
         <mesh key={s} position={[s * 4.6, 4.74, 0]} rotation={[0, 0, s * 0.08]}>
@@ -113,14 +108,16 @@ const floorFragment = `varying vec3 vWorld;uniform float uSci;uniform float uTim
   vec3 reflection=texture2D(uCourt,clamp(uv,0.,1.)).rgb;
   hit=vWorld+ray*((-52.-vWorld.z)/min(ray.z,-.001));uv=vec2(hit.x/64.+.5,(hit.y-8.)/36.+.5);
   reflection=mix(reflection,texture2D(uFuture,clamp(uv,0.,1.)).rgb,uSci);
-  float fresnel=pow(1.-abs(ray.y),3.);vec3 c=mix(vec3(.004,.009,.013),vec3(.005,.014,.022),uSci)*(1.+n*.7+stone*.4);
-  c+=reflection*(.12+fresnel*.32)*wet;
-  c*=1.-seam*.57;
+  float fresnel=pow(1.-abs(ray.y),3.);vec3 c=mix(vec3(.43,.49,.49)*( .86+n*.12+stone*.08),vec3(.005,.014,.022)*(1.+n*.7+stone*.4),uSci);
+  c+=reflection*(.04+fresnel*.16)*wet*mix(.18,1.,uSci);
+  c*=1.-seam*mix(.16,.57,uSci);
   float lamp=exp(-abs(abs(p.x)-4.2)*4.)*pow(.5+.5*cos((p.y+1.)*1.047),12.);
   c+=vec3(.14,.048,.009)*lamp*(1.-uSci)*(.35+n*.65);
   float road=exp(-abs(abs(p.x)-2.9)*55.);float pulse=.48+.12*sin(p.y*1.3+uTime*.5);
   c+=vec3(.025,.18,.22)*road*uSci*pulse;
-  float fog=1.-exp(-length(p-uCamera.xz)*.004);c=mix(c,vec3(.008,.018,.025),fog);
+  float shade=(sin(p.x*.7+p.y*.38)+sin(p.x*1.3-p.y*.5))*.018;
+  c+=vec3(shade)*(1.-uSci);
+  float fog=1.-exp(-length(p-uCamera.xz)*.004);c=mix(c,mix(vec3(.68,.77,.79),vec3(.008,.018,.025),uSci),fog);
   gl_FragColor=vec4(c,1.);
   #include <tonemapping_fragment>
   #include <colorspace_fragment>
@@ -132,7 +129,7 @@ export function MovieWorld({
   progress: MutableRefObject<number>;
 }) {
   const [courtyard, scifi] = useTexture([
-    `${base}assets/images/japanese-night-environment.webp`,
+    `${base}assets/images/japanese-sakura-environment.webp`,
     `${base}assets/images/scifi-portal-environment.webp`,
   ]);
   useMemo(() => {
@@ -144,7 +141,15 @@ export function MovieWorld({
   const backCourt = useRef<THREE.MeshBasicMaterial>(null!),
     backFuture = useRef<THREE.MeshBasicMaterial>(null!);
   const floor = useRef<THREE.ShaderMaterial>(null!);
-  const { size, camera } = useThree();
+  const { size, camera, scene, gl } = useThree();
+  const sky = useMemo(
+    () => ({
+      day: new THREE.Color("#e2edf3"),
+      night: new THREE.Color("#071522"),
+      mixed: new THREE.Color(),
+    }),
+    [],
+  );
   const uniforms = useMemo(
     () => ({
       uSci: { value: 0 },
@@ -164,6 +169,13 @@ export function MovieWorld({
     floor.current.uniforms.uSci.value = d.scifi;
     floor.current.uniforms.uTime.value = clock.elapsedTime;
     floor.current.uniforms.uCamera.value.copy(camera.position);
+    sky.mixed.copy(sky.day).lerp(sky.night, d.scifi);
+    gl.setClearColor(sky.mixed, 1);
+    if (scene.fog instanceof THREE.Fog) {
+      scene.fog.color.copy(sky.mixed);
+      scene.fog.near = THREE.MathUtils.lerp(28, 16, d.scifi);
+      scene.fog.far = THREE.MathUtils.lerp(95, 58, d.scifi);
+    }
   });
   return (
     <>
@@ -172,7 +184,8 @@ export function MovieWorld({
         <meshBasicMaterial
           ref={backCourt}
           map={courtyard}
-          color="#abbfcf"
+          color="white"
+          toneMapped={false}
           transparent
           depthWrite={false}
           fog={false}
@@ -206,24 +219,10 @@ export function MovieWorld({
             <Lantern key={`${x}${z}`} position={[x, 0, z]} />
           )),
         )}
-        {[-1, 1].map((s) => (
-          <group key={s} position={[s * 6, 0, -2]}>
-            <mesh position={[0, 3.3, 0]} rotation={[0, 0, -s * 0.1]}>
-              <cylinderGeometry args={[0.14, 0.45, 6.6, 9]} />
-              <meshStandardMaterial color="#101b21" />
-            </mesh>
-            {[1, 2, 3].map((i) => (
-              <mesh
-                key={i}
-                position={[-s * i * 0.35, 4.3 + i * 0.35, 0]}
-                rotation={[0.2, 0, s * 0.65]}
-              >
-                <cylinderGeometry args={[0.035, 0.12, 2.6, 7]} />
-                <meshStandardMaterial color="#101b21" />
-              </mesh>
-            ))}
-          </group>
-        ))}
+        <SakuraTree position={[-7.4, 0, -2.5]} />
+        <SakuraTree position={[7.6, 0, -5]} mirror={-1} />
+        <Temple position={[-8.7, 0, -11]} />
+        <Temple position={[8.7, 0, -15]} />
       </group>
       <group ref={future}>
         {[-5, -10, -15, -20, -25, -31].flatMap((z, i) =>
@@ -319,28 +318,14 @@ export function WindAndAtmosphere({
   const dust = useRef<THREE.Points>(null!);
   const t = useRef(0);
   const { size } = useThree();
-  const count = low ? 38 : 100;
+  const count = low ? 80 : 190;
   const geo = useMemo(() => {
     const shape = new THREE.Shape();
-    shape.moveTo(0, -0.68);
-    [
-      [-0.13, -0.13],
-      [-0.4, -0.23],
-      [-0.29, 0.04],
-      [-0.75, 0.21],
-      [-0.41, 0.28],
-      [-0.5, 0.64],
-      [-0.2, 0.48],
-      [0, 0.97],
-      [0.2, 0.48],
-      [0.5, 0.64],
-      [0.41, 0.28],
-      [0.75, 0.21],
-      [0.29, 0.04],
-      [0.4, -0.23],
-      [0.13, -0.13],
-      [0, -0.68],
-    ].forEach(([x, y]) => shape.lineTo(x, y));
+    shape.moveTo(0, -0.65);
+    shape.bezierCurveTo(-0.8, -0.08, -0.53, 0.8, -0.12, 0.65);
+    shape.lineTo(0, 0.49);
+    shape.lineTo(0.12, 0.65);
+    shape.bezierCurveTo(0.53, 0.8, 0.8, -0.08, 0, -0.65);
     const g = new THREE.ShapeGeometry(shape);
     const p = g.getAttribute("position");
     for (let i = 0; i < p.count; i++)
@@ -379,7 +364,9 @@ export function WindAndAtmosphere({
     const wind = t.current * 0.33 + progress.current * 37;
     for (let i = 0; i < count; i++) {
       const seed = (i * 73.713) % 1;
-      const x = ((((i * 2.718 + wind * (0.7 + seed)) % 26) + 26) % 26) - 13;
+      const x =
+        ((((i * 2.718 + wind * (0.7 + seed) + d.dash * 3) % 26) + 26) % 26) -
+        13;
       const y = 0.3 + ((((i * 1.137 - wind * 0.2) % 6) + 6) % 6);
       const z = d.camera[2] - 2 - ((i * 1.73 + wind * 0.13) % 29);
       dummy.position.set(
@@ -392,11 +379,11 @@ export function WindAndAtmosphere({
         wind + i * 0.37,
         Math.sin(wind + i) * 1.3,
       );
-      dummy.scale.setScalar(0.04 + seed * 0.085);
+      dummy.scale.setScalar(0.045 + seed * 0.065);
       dummy.updateMatrix();
       leaves.current.setMatrixAt(i, dummy.matrix);
       color
-        .setHSL(0.028 + (i % 5) * 0.009, 0.78, 0.15 + (i % 3) * 0.055)
+        .setHSL(0.94 + (i % 4) * 0.009, 0.45, 0.66 + (i % 3) * 0.09)
         .lerp(ice, d.scifi * 0.72);
       leaves.current.setColorAt(i, color);
     }
@@ -408,7 +395,8 @@ export function WindAndAtmosphere({
     fog.current.position.z = d.camera[2] - 9;
     hazeMaterials.current.forEach((m, i) => {
       m.uniforms.uTime.value = t.current + i * 7 + progress.current * 30;
-      m.uniforms.uOpacity.value = (0.065 + d.warp * 0.1) / (1 + i * 0.5);
+      m.uniforms.uOpacity.value =
+        (0.01 + d.scifi * 0.05 + d.warp * 0.1) / (1 + i * 0.5);
     });
     dust.current.position.z = d.camera[2] - 2 + ((wind * 0.3) % 3);
     dust.current.rotation.z =

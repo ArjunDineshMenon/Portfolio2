@@ -1,0 +1,37 @@
+{
+  "added": [
+    "Courtyard_Guard",
+    "Dash_Wide_Slash",
+    "Slow_Sheathe",
+    "Sheathed_Portal_Entry",
+    "Hologram_Conduct_Left",
+    "Hologram_Conduct_Right",
+    "Blade_Flourish"
+  ],
+  "clips": [
+    "Blade_Flourish",
+    "Closing_Bow",
+    "Courtyard_Guard",
+    "Dash_Wide_Slash",
+    "Draw_Katana",
+    "Enter_From_Shadow",
+    "Hologram_Conduct_Left",
+    "Hologram_Conduct_Right",
+    "Hologram_Slice",
+    "Idle_Breathing",
+    "Panel_Reveal_Left",
+    "Panel_Reveal_Right",
+    "Panel_Slash_Left",
+    "Panel_Slash_Right",
+    "Portal_Brace",
+    "Portal_Entry",
+    "Portal_Landing",
+    "Recover_From_Slice",
+    "Sheathe_Katana",
+    "Sheathed_Portal_Entry",
+    "Slow_Sheathe",
+    "Walk_Forward_Loop",
+    "Walk_Travel_Loop"
+  ],
+  "master": "artifacts/sakura/samurai-sakura.blend"
+}

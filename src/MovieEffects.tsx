@@ -8,6 +8,8 @@ export function Portals({ progress }: { progress: MutableRefObject<number> }) {
   const rings = useRef<THREE.Mesh[]>([]);
   const { size } = useThree();
   const particles = useRef<THREE.Points>(null!);
+  const lastP = useRef(-1);
+  const lastWidth = useRef(0);
   const positions = useMemo(() => {
     const a = new Float32Array(2400 * 3);
     for (let i = 0; i < 2400; i++) {
@@ -21,6 +23,10 @@ export function Portals({ progress }: { progress: MutableRefObject<number> }) {
     return a;
   }, []);
   useFrame(() => {
+    if (lastP.current === progress.current && lastWidth.current === size.width)
+      return;
+    lastP.current = progress.current;
+    lastWidth.current = size.width;
     const d = direct(progress.current, size.width < 760);
     group.current.visible = d.warp > 0.001;
     group.current.position.set(0, 1.65, d.camera[2] - 3.9);
@@ -105,6 +111,7 @@ export function HologramSurfaces({
     const d = direct(progress.current, size.width < 760),
       mobile = size.width < 760;
     group.current.visible = !!d.shot;
+    if (!group.current.visible) return;
     group.current.position.set(...d.anchor);
     group.current.position.z -= 0.1;
     group.current.scale.set(mobile ? 0.65 : 1, mobile ? 0.66 : 1, 1);

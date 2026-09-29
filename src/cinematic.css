@@ -15,9 +15,53 @@
   background: radial-gradient(
     ellipse at 50% 45%,
     transparent 37%,
-    #02081177 100%
+    #02081133 100%
   );
   z-index: 2;
+}
+.is-cinematic[data-world="courtyard"] .world:after {
+  background: none;
+}
+.is-cinematic[data-world="courtyard"] .site-header {
+  background: linear-gradient(#eef4f3ee, #eef4f388 65%, transparent);
+  color: #233d40;
+}
+.is-cinematic[data-world="courtyard"] .brand,
+.is-cinematic[data-world="courtyard"] .site-header nav a,
+.is-cinematic[data-world="courtyard"] .menu-toggle,
+.is-cinematic[data-world="courtyard"] .header-edition {
+  color: #233d40;
+}
+.is-cinematic[data-world="courtyard"] .brand > span > span,
+.is-cinematic[data-world="courtyard"] .header-edition span {
+  color: #4e6462;
+}
+.is-cinematic[data-world="courtyard"] .journey-controls {
+  background: linear-gradient(transparent, #ecf1f0e8 55%);
+  color: #233d40;
+}
+.is-cinematic[data-world="courtyard"] .journey-controls button,
+.is-cinematic[data-world="courtyard"] .journey-controls a,
+.is-cinematic[data-world="courtyard"] .journey-controls span {
+  color: #233d40;
+}
+.is-cinematic[data-world="courtyard"] .movie-title {
+  color: #203a3f;
+  text-shadow: 0 1px 18px #ffffffc9;
+}
+.is-cinematic[data-world="courtyard"] .movie-title em {
+  color: #963d53;
+}
+.is-cinematic[data-world="courtyard"] .movie-kicker,
+.is-cinematic[data-world="courtyard"] .movie-role,
+.is-cinematic[data-world="courtyard"] .movie-japanese,
+.is-cinematic[data-world="courtyard"] .movie-contact-copy,
+.is-cinematic[data-world="courtyard"] .movie-copyright,
+.is-cinematic[data-world="courtyard"] .movie-bow > span {
+  color: #35545a;
+}
+.is-cinematic[data-world="courtyard"] .nav-open {
+  background: #f1f6f4;
 }
 .is-cinematic .site-header {
   height: 100px;
@@ -390,7 +434,7 @@ ul.cinema-certifications {
   position: absolute;
   left: 8.4%;
   top: 28%;
-  width: 45%;
+  width: 28%;
   pointer-events: none;
   color: #f0f0e9;
   text-shadow: 0 2px 28px #020a14a6;
@@ -404,7 +448,7 @@ ul.cinema-certifications {
 .movie-intro h1 {
   font-weight: 400;
   letter-spacing: -0.055em;
-  font-size: clamp(70px, 8vw, 120px);
+  font-size: 86px;
   line-height: 0.93;
 }
 .movie-intro h1 em {
@@ -448,10 +492,10 @@ ul.cinema-certifications {
 }
 .movie-arrival {
   top: 30%;
-  max-width: 430px;
+  max-width: 330px;
 }
 .movie-bio {
-  font-size: clamp(22px, 2.45vw, 34px);
+  font-size: 26px;
   line-height: 1.42;
   letter-spacing: -0.025em;
 }
@@ -467,7 +511,7 @@ ul.cinema-certifications {
   text-align: center;
 }
 .movie-caption {
-  font-size: clamp(30px, 4vw, 59px);
+  font-size: 52px;
   letter-spacing: -0.05em;
   line-height: 1.15;
 }
@@ -478,7 +522,7 @@ ul.cinema-certifications {
   top: 31%;
 }
 .movie-thanks {
-  font-size: clamp(50px, 6.6vw, 95px);
+  font-size: 72px;
   letter-spacing: -0.055em;
   line-height: 1.04;
 }
@@ -495,7 +539,7 @@ ul.cinema-certifications {
   max-width: 780px;
 }
 .movie-contact h2 {
-  font-size: clamp(65px, 8vw, 118px);
+  font-size: 94px;
 }
 .movie-contact-copy {
   max-width: 460px;
@@ -629,7 +673,7 @@ ul.cinema-certifications {
   }
   .cinema-sheet {
     padding: 16px 20px 14px;
-    max-height: 43svh;
+    max-height: 34svh;
     overflow: auto;
     backdrop-filter: blur(8px);
   }
@@ -792,10 +836,10 @@ ul.cinema-certifications {
     font-size: 9px;
   }
   .movie-intro {
-    top: 58%;
+    top: 67%;
   }
   .movie-intro h1 {
-    font-size: 65px;
+    font-size: 56px;
   }
   .movie-intro h1 br {
     display: none;

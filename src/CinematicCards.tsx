@@ -219,8 +219,23 @@ export function InformationSurface({
   const [shot, setShot] = useState<InfoShot | null>(null);
   const current = useRef("");
   const projected = useRef(new THREE.Vector3());
+  const last = useRef({ p: -1, width: 0, height: 0, shot: "" });
   const { size } = useThree();
   useFrame(() => {
+    const key = shot?.id ?? "";
+    if (
+      last.current.p === progress.current &&
+      last.current.width === size.width &&
+      last.current.height === size.height &&
+      last.current.shot === key
+    )
+      return;
+    last.current = {
+      p: progress.current,
+      width: size.width,
+      height: size.height,
+      shot: key,
+    };
     const d = direct(progress.current, size.width < 760);
     group.current.position.set(...d.anchor);
     if ((d.shot?.id ?? "") !== current.current) {
@@ -334,7 +349,19 @@ export function StoryTitles({
   const el = useRef<HTMLDivElement>(null!);
   const [beat, setBeat] = useState("opening");
   const prev = useRef("opening");
+  const previousFrame = useRef({ p: -1, width: 0, height: 0 });
   useFrame(() => {
+    if (
+      previousFrame.current.p === progress.current &&
+      previousFrame.current.width === size.width &&
+      previousFrame.current.height === size.height
+    )
+      return;
+    previousFrame.current = {
+      p: progress.current,
+      width: size.width,
+      height: size.height,
+    };
     anchor.current.position
       .copy(camera.position)
       .add(camera.getWorldDirection(forward.current));

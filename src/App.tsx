@@ -194,7 +194,7 @@ export default function App() {
       if (!cancelled) setReady(true);
     }, 10000);
     const images = [
-      "japanese-night-environment",
+      "japanese-sakura-environment",
       "scifi-portal-environment",
       "arjun-face-cutout",
     ];
@@ -390,7 +390,7 @@ export default function App() {
         <div
           className="backdrop courtyard"
           style={{
-            backgroundImage: `url(${asset("japanese-night-environment")})`,
+            backgroundImage: `url(${asset("japanese-sakura-environment")})`,
           }}
         />
         <div

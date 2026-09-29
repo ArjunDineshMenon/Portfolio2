@@ -83,7 +83,7 @@ test("all fourteen information stations reveal after the strike and hold still f
 });
 
 const file = readFileSync(
-  new URL("../public/assets/models/samurai-cinematic.glb", import.meta.url),
+  new URL("../public/assets/models/samurai-sakura.glb", import.meta.url),
 );
 const length = file.readUInt32LE(12),
   original = JSON.parse(file.subarray(20, 20 + length).toString());
@@ -118,10 +118,10 @@ const snapshot = (p) => {
     .flatMap((n) => bone(n.name).matrixWorld.elements.slice());
 };
 
-test("deployed cinematic model contains a skin and sixteen genuine exported bone animations", () => {
+test("deployed cinematic model contains a skin and twenty-eight exported bone animations", () => {
   assert.equal(sampler.ready, true);
   assert.ok(original.skins.length > 0);
-  assert.equal(asset.animations.length, 16);
+  assert.equal(asset.animations.length, 28);
   for (const name of [
     "Walk_Travel_Loop",
     "Panel_Slash_Left",
@@ -129,6 +129,16 @@ test("deployed cinematic model contains a skin and sixteen genuine exported bone
     "Portal_Entry",
     "Portal_Landing",
     "Closing_Bow",
+    "Dash_Wide_Slash",
+    "Slow_Sheathe",
+    "Hologram_Conduct_Left",
+    "Hologram_Conduct_Right",
+    "Blade_Flourish",
+    "Slash_Horizontal",
+    "Slash_Diagonal",
+    "Slash_Rising",
+    "Scan_Display",
+    "Guard_Step",
   ])
     assert.ok(asset.animations.find((c) => c.name === name));
   assert.ok(file.length < 5_000_000);
@@ -137,6 +147,35 @@ test("deployed cinematic model contains a skin and sixteen genuine exported bone
   assert.ok(
     asset.animations.every((c) => c.tracks.length >= 60 && c.duration > 0.8),
   );
+});
+
+test("opening silhouettes stay separated and the portrait bursts only at the end of sheathing", () => {
+  for (const mobile of [false, true]) {
+    const d = direct(.22, mobile);
+    assert.ok(Math.abs(d.actor[0] - d.faceX) > 2);
+    assert.ok(d.actor[2] >= 0);
+    assert.ok(d.faceScale > (mobile ? .83 : 1));
+    assert.ok(d.actorOpacity > .9);
+  }
+  assert.ok(direct(.335).actor[0] > 2.5);
+  assert.ok(direct(.36).actor[0] < -2.5);
+  assert.equal(direct(.4).faceBurst, 0);
+  assert.equal(direct(.4).warp, 0);
+  assert.equal(direct(.4).scifi, 0);
+  assert.ok(direct(.429).faceBurst > 0);
+  assert.equal(direct(.48).scifi, 1);
+});
+
+test("reading gestures animate with elapsed time while story actions remain scroll controlled", () => {
+  const sample = (p, time) => {
+    sampler.sample(p, time);
+    return bone("hand.L").quaternion.toArray();
+  };
+  assert.notDeepEqual(sample(.505, 0), sample(.505, 1.1));
+  assert.deepEqual(sample(.35, 0), sample(.35, 1.1));
+  sampler.dispose();
+  sampler.activate();
+  assert.notDeepEqual(sample(.505, 0), sample(.505, 1.1));
 });
 test("actual cinematic poses reverse exactly and remain continuous at every action boundary", () => {
   const samples = Array.from({ length: 1001 }, (_, i) => i / 1000),
@@ -180,4 +219,19 @@ test("new panel strikes move the sword and torso; the closing bow plants the fee
   );
   snapshot(1);
   assert.ok(bone("blade_socket").scale.y < 0.01);
+});
+
+test("sword actions keep both shoulder joints attached and sci-fi stations use five different cuts", () => {
+  const names = new Set(MOVIE_CUES.filter(c => c.start >= .47 && c.end <= .89 && c.name.includes('Slash')).map(c=>c.name));
+  assert.equal(names.size, 5);
+  const active = MOVIE_CUES.filter(c=>c.name.includes('Slash'));
+  for (const side of ['L','R']) {
+    snapshot(0);
+    const shoulder = bone(`upper_arm.${side}`).position.clone();
+    for (const cue of active) for (let i=0; i<=20; i++) {
+      sampler.sample(cue.start + (cue.end-cue.start)*i/20);
+      assert.ok(shoulder.distanceTo(bone(`upper_arm.${side}`).position)<.00001,
+        `${cue.name}: ${side} shoulder translated away from its attachment`);
+    }
+  }
 });

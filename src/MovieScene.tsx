@@ -19,6 +19,7 @@ import { MoviePortrait } from "./MoviePortrait";
 import { MovieWorld, WindAndAtmosphere } from "./MovieWorld";
 import { Portals, HologramSurfaces, PortalFlash } from "./MovieEffects";
 import { InformationSurface, StoryTitles } from "./CinematicCards";
+import { LivingFuture, SamuraiInteraction } from "./SceneLife";
 
 type Props = {
   progress: MutableRefObject<number>;
@@ -50,7 +51,8 @@ function CameraAndHealth({
   onSlow: () => void;
 }) {
   const { camera, gl, size } = useThree();
-  const frames = useRef({ n: 0, t: 0, warmup: 0 });
+  const frames = useRef({ n: 0, t: 0, warmup: 0, fastest: 1 / 60 });
+  const lastCamera = useRef({ progress: -1, width: 0, height: 0 });
   useEffect(() => {
     const lost = (e: Event) => {
       e.preventDefault();
@@ -62,9 +64,20 @@ function CameraAndHealth({
   }, [gl, onError]);
   useFrame((_, delta) => {
     const d = direct(progress.current, size.width < 760);
-    camera.position.set(...d.camera);
-    camera.lookAt(...d.look);
-    camera.updateMatrixWorld();
+    const changed =
+      lastCamera.current.progress !== progress.current ||
+      lastCamera.current.width !== size.width ||
+      lastCamera.current.height !== size.height;
+    if (changed) {
+      camera.position.set(...d.camera);
+      camera.lookAt(...d.look);
+      camera.updateMatrixWorld();
+      lastCamera.current = {
+        progress: progress.current,
+        width: size.width,
+        height: size.height,
+      };
+    }
     if (camera instanceof THREE.PerspectiveCamera) {
       const fov = size.width < 760 ? 51 : 42;
       if (camera.fov !== fov) {
@@ -72,15 +85,25 @@ function CameraAndHealth({
         camera.updateProjectionMatrix();
       }
     }
-    gl.domElement.dataset.scene = d.scifi > 0.5 ? "scifi" : "courtyard";
-    gl.domElement.dataset.shot = d.shot?.id ?? "";
+    if (changed) {
+      gl.domElement.dataset.scene = d.scifi > 0.5 ? "scifi" : "courtyard";
+      const app = gl.domElement.closest<HTMLElement>(".app");
+      if (app) app.dataset.world = d.scifi > 0.5 ? "scifi" : "courtyard";
+      gl.domElement.dataset.shot = d.shot?.id ?? "";
+    }
     const h = frames.current;
     h.warmup += delta;
     if (h.warmup > 5 && delta < 0.5) {
+      if (delta > 1 / 300) h.fastest = Math.min(h.fastest, delta);
       h.n++;
       h.t += delta;
       if (h.t > 3) {
-        if (h.n / h.t < 33) onSlow();
+        const fps = h.n / h.t;
+        const target = Math.min(240, 1 / h.fastest);
+        gl.domElement.dataset.fps = fps.toFixed(0);
+        gl.domElement.dataset.drawCalls = String(gl.info.render.calls);
+        gl.domElement.dataset.triangles = String(gl.info.render.triangles);
+        if (fps < target * 0.78) onSlow();
         h.n = 0;
         h.t = 0;
       }
@@ -99,7 +122,7 @@ function Actor({
   onError: () => void;
 }) {
   const { scene, animations } = useGLTF(
-    `${import.meta.env.BASE_URL}assets/models/samurai-cinematic.glb`,
+    `${import.meta.env.BASE_URL}assets/models/samurai-sakura.glb`,
     `${import.meta.env.BASE_URL}draco/`,
   );
   const group = useRef<THREE.Group>(null!),
@@ -168,7 +191,10 @@ function Actor({
       ]),
     [],
   );
+  const lastTrail = useRef(-1);
+  const lastTrailWidth = useRef(0);
   useEffect(() => {
+    sampler.activate();
     if (sampler.ready && blade) onLoaded();
     else onError();
     return () => {
@@ -177,16 +203,17 @@ function Actor({
       ribbon.dispose();
     };
   }, [sampler, blade, onLoaded, onError, materials, ribbon]);
-  useFrame(() => {
+  useFrame(({ clock }) => {
     const p = progress.current,
       d = direct(p, size.width < 760),
       mobile = size.width < 760;
     group.current.position.set(...d.actor);
     group.current.rotation.y = d.yaw;
-    group.current.visible = p > 0.23 && p < 1;
-    group.current.scale.setScalar(mobile ? 0.93 : 1);
+    group.current.visible = p < 1;
+    group.current.scale.setScalar(d.actorScale);
     materials.forEach((m) => (m.opacity = d.actorOpacity));
-    const active = sampler.sample(p);
+    const ambient = clock.elapsedTime;
+    const active = sampler.sample(p, ambient);
     model.updateMatrixWorld(true);
     group.current.updateMatrixWorld(true);
     const striking =
@@ -195,12 +222,22 @@ function Actor({
       ? Math.pow(Math.sin(active.time * Math.PI), 3) * d.actorOpacity
       : 0;
     trail.current.visible = intensity > 0.03;
-    if (intensity > 0.03 && blade) {
+    if (
+      intensity > 0.03 &&
+      blade &&
+      (p !== lastTrail.current || size.width !== lastTrailWidth.current)
+    ) {
+      lastTrail.current = p;
+      lastTrailWidth.current = size.width;
       for (let i = 0; i < 9; i++) {
-        sampler.sample(Math.max(0, p - i * 0.0001));
+        const trailP = Math.max(0, p - i * (d.dash > 0 ? 0.0012 : 0.00012));
+        sampler.sample(trailP, ambient);
+        const past = direct(trailP, mobile);
+        group.current.position.set(...past.actor);
+        group.current.rotation.y = past.yaw;
         group.current.updateMatrixWorld(true);
-        vectors[i][0].copy(blade.localToWorld(new THREE.Vector3(0, 0.05, 0)));
-        vectors[i][1].copy(blade.localToWorld(new THREE.Vector3(0, 0.72, 0)));
+        vectors[i][0].set(0, 0.05, 0).applyMatrix4(blade.matrixWorld);
+        vectors[i][1].set(0, 0.72, 0).applyMatrix4(blade.matrixWorld);
       }
       const attr = ribbon.getAttribute("position") as THREE.BufferAttribute;
       let n = 0;
@@ -219,12 +256,15 @@ function Actor({
       (
         trail.current.material as THREE.ShaderMaterial
       ).uniforms.uStrength.value = intensity;
-      sampler.sample(p);
+      group.current.position.set(...d.actor);
+      group.current.rotation.y = d.yaw;
+      sampler.sample(p, ambient);
       group.current.updateMatrixWorld(true);
     }
     gl.domElement.dataset.animation = sampler.ready ? "rigged" : "incomplete";
     gl.domElement.dataset.clip = active.name;
     gl.domElement.dataset.actor = d.actor.map((n) => n.toFixed(3)).join(",");
+    gl.domElement.dataset.clipTime = active.time.toFixed(3);
   }, -1);
   return (
     <>
@@ -246,11 +286,12 @@ function Actor({
           <primitive object={model} position={offset} />
         </group>
       </group>
+      <SamuraiInteraction progress={progress} model={model} />
       <mesh ref={trail} geometry={ribbon} frustumCulled={false}>
         <shaderMaterial
           uniforms={trailUniforms}
           vertexShader={`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`}
-          fragmentShader={`varying vec2 vUv;uniform float uStrength;void main(){float a=pow(1.-vUv.x,1.6)*pow(max(0.,sin(vUv.y*3.14159)),.7);gl_FragColor=vec4(.27,.82,1.,a*uStrength*.48);}`}
+          fragmentShader={`varying vec2 vUv;uniform float uStrength;void main(){float a=pow(1.-vUv.x,1.2)*pow(max(0.,sin(vUv.y*3.14159)),.5);gl_FragColor=vec4(.35,.9,1.,a*uStrength*.85);}`}
           transparent
           side={THREE.DoubleSide}
           depthWrite={false}
@@ -286,30 +327,30 @@ export default function MovieScene({ progress, onError, onReady }: Props) {
         </div>
       )}
       <Canvas
-        dpr={low ? [1, 1.1] : [1, 1.6]}
+        dpr={low ? 1 : [1, 1.25]}
         frameloop={hidden ? "never" : "always"}
         camera={{ position: [0, 2, 12], fov: 42, near: 0.08, far: 110 }}
         gl={{
-          alpha: true,
+          alpha: false,
           antialias: !low,
           powerPreference: "high-performance",
           stencil: false,
         }}
-        onCreated={({ gl }) => gl.setClearColor("#050c14", 1)}
+        onCreated={({ gl }) => gl.setClearColor("#e2edf3", 1)}
       >
         <fog attach="fog" args={["#071522", 16, 58]} />
-        <ambientLight intensity={0.8} color="#a9bdd2" />
+        <ambientLight intensity={1.15} color="#e6edf2" />
         <directionalLight
           position={[4, 7, 5]}
-          intensity={2.6}
-          color="#d1e6f4"
+          intensity={2.1}
+          color="#fff8ef"
         />
         <directionalLight
           position={[-5, 4, -5]}
-          intensity={2.8}
-          color="#479bbb"
+          intensity={1.3}
+          color="#aecfe4"
         />
-        <hemisphereLight args={["#7194b6", "#1f252c", 0.55]} />
+        <hemisphereLight args={["#d7ecff", "#65705b", 0.8]} />
         <CameraAndHealth progress={progress} onError={onError} onSlow={slow} />
         <AssetBoundary onError={onError}>
           <Suspense fallback={null}>
@@ -325,6 +366,7 @@ export default function MovieScene({ progress, onError, onReady }: Props) {
           </Suspense>
         </AssetBoundary>
         <WindAndAtmosphere progress={progress} low={low} />
+        <LivingFuture progress={progress} low={low} />
         <Portals progress={progress} />
         <HologramSurfaces progress={progress} />
         <PortalFlash progress={progress} />

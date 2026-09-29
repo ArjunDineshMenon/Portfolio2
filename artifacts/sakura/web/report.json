@@ -1,0 +1,296 @@
+{
+  "errors": [],
+  "report": [
+    {
+      "name": "desktop",
+      "label": "opening",
+      "p": 0.02,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "courtyard",
+        "shot": "",
+        "animation": "rigged",
+        "clip": "Courtyard_Guard",
+        "actor": "2.800,0.000,0.250",
+        "clipTime": "0.805"
+      },
+      "pixelDeviation": 52.35037141361638
+    },
+    {
+      "name": "desktop",
+      "label": "portrait",
+      "p": 0.21,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "courtyard",
+        "shot": "",
+        "animation": "rigged",
+        "clip": "Courtyard_Guard",
+        "actor": "2.800,0.000,0.250",
+        "clipTime": "0.373"
+      },
+      "pixelDeviation": 56.28863759551752
+    },
+    {
+      "name": "desktop",
+      "label": "prepare",
+      "p": 0.33,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "courtyard",
+        "shot": "",
+        "animation": "rigged",
+        "clip": "Dash_Wide_Slash",
+        "actor": "2.800,0.000,0.641",
+        "clipTime": "0.200"
+      },
+      "pixelDeviation": 59.91603565288204
+    },
+    {
+      "name": "desktop",
+      "label": "dash",
+      "p": 0.35,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "courtyard",
+        "shot": "",
+        "animation": "rigged",
+        "clip": "Dash_Wide_Slash",
+        "actor": "-0.796,0.000,0.780",
+        "clipTime": "0.600"
+      },
+      "pixelDeviation": 60.743635415365986
+    },
+    {
+      "name": "desktop",
+      "label": "sheathe",
+      "p": 0.39,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "courtyard",
+        "shot": "",
+        "animation": "rigged",
+        "clip": "Slow_Sheathe",
+        "actor": "-2.750,0.000,0.850",
+        "clipTime": "0.455"
+      },
+      "pixelDeviation": 61.68478969163161
+    },
+    {
+      "name": "desktop",
+      "label": "burst",
+      "p": 0.427,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "courtyard",
+        "shot": "",
+        "animation": "rigged",
+        "clip": "Sheathed_Portal_Entry",
+        "actor": "-1.668,0.000,-0.654",
+        "clipTime": "0.342"
+      },
+      "pixelDeviation": 60.96177288574838
+    },
+    {
+      "name": "desktop",
+      "label": "about",
+      "p": 0.505,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "scifi",
+        "shot": "about-story",
+        "animation": "rigged",
+        "clip": "Hologram_Conduct_Left",
+        "actor": "1.821,0.000,-4.114",
+        "clipTime": "0.983",
+        "fps": "60",
+        "drawCalls": "218",
+        "triangles": "300693",
+        "environmentTime": "10.95"
+      },
+      "pixelDeviation": 24.21682348386216
+    },
+    {
+      "name": "desktop",
+      "label": "project",
+      "p": 0.706,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "scifi",
+        "shot": "project-s3",
+        "animation": "rigged",
+        "clip": "Blade_Flourish",
+        "actor": "1.864,0.000,-12.497",
+        "clipTime": "0.137",
+        "fps": "60",
+        "drawCalls": "218",
+        "triangles": "300693",
+        "environmentTime": "13.37"
+      },
+      "pixelDeviation": 23.853953485069425
+    },
+    {
+      "name": "desktop",
+      "label": "bow",
+      "p": 0.972,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "courtyard",
+        "shot": "",
+        "animation": "rigged",
+        "clip": "Closing_Bow",
+        "actor": "1.700,0.000,0.000",
+        "clipTime": "0.500",
+        "fps": "59",
+        "drawCalls": "166",
+        "triangles": "154865",
+        "environmentTime": "13.94"
+      },
+      "pixelDeviation": 54.00766390862584
+    },
+    {
+      "name": "mobile",
+      "label": "opening",
+      "p": 0.02,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "courtyard",
+        "shot": "",
+        "animation": "rigged",
+        "clip": "Courtyard_Guard",
+        "actor": "1.344,0.000,0.250",
+        "clipTime": "0.520"
+      },
+      "pixelDeviation": 48.69663873748226
+    },
+    {
+      "name": "mobile",
+      "label": "portrait",
+      "p": 0.21,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "courtyard",
+        "shot": "",
+        "animation": "rigged",
+        "clip": "Courtyard_Guard",
+        "actor": "1.344,0.000,0.250",
+        "clipTime": "0.051"
+      },
+      "pixelDeviation": 54.58145492665246
+    },
+    {
+      "name": "mobile",
+      "label": "prepare",
+      "p": 0.33,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "courtyard",
+        "shot": "",
+        "animation": "rigged",
+        "clip": "Dash_Wide_Slash",
+        "actor": "1.344,0.000,0.641",
+        "clipTime": "0.200"
+      },
+      "pixelDeviation": 54.639289010848934
+    },
+    {
+      "name": "mobile",
+      "label": "dash",
+      "p": 0.35,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "courtyard",
+        "shot": "",
+        "animation": "rigged",
+        "clip": "Dash_Wide_Slash",
+        "actor": "-0.382,0.000,0.780",
+        "clipTime": "0.600"
+      },
+      "pixelDeviation": 55.377019467839936
+    },
+    {
+      "name": "mobile",
+      "label": "sheathe",
+      "p": 0.39,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "courtyard",
+        "shot": "",
+        "animation": "rigged",
+        "clip": "Slow_Sheathe",
+        "actor": "-1.320,0.000,0.850",
+        "clipTime": "0.455"
+      },
+      "pixelDeviation": 56.31378021674074
+    },
+    {
+      "name": "mobile",
+      "label": "burst",
+      "p": 0.427,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "courtyard",
+        "shot": "",
+        "animation": "rigged",
+        "clip": "Sheathed_Portal_Entry",
+        "actor": "-0.801,0.000,-0.654",
+        "clipTime": "0.342"
+      },
+      "pixelDeviation": 56.03476056981022
+    },
+    {
+      "name": "mobile",
+      "label": "about",
+      "p": 0.505,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "scifi",
+        "shot": "about-story",
+        "animation": "rigged",
+        "clip": "Hologram_Conduct_Left",
+        "actor": "0.419,0.000,-4.114",
+        "clipTime": "0.908",
+        "environmentTime": "6.18"
+      },
+      "pixelDeviation": 30.594838912947427
+    },
+    {
+      "name": "mobile",
+      "label": "project",
+      "p": 0.706,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "scifi",
+        "shot": "project-s3",
+        "animation": "rigged",
+        "clip": "Blade_Flourish",
+        "actor": "0.429,0.000,-12.497",
+        "clipTime": "0.064",
+        "environmentTime": "8.18",
+        "fps": "52",
+        "drawCalls": "139",
+        "triangles": "153481"
+      },
+      "pixelDeviation": 29.229064344355088
+    },
+    {
+      "name": "mobile",
+      "label": "bow",
+      "p": 0.972,
+      "state": {
+        "engine": "three.js r180",
+        "scene": "courtyard",
+        "shot": "",
+        "animation": "rigged",
+        "clip": "Closing_Bow",
+        "actor": "0.816,0.000,0.000",
+        "clipTime": "0.500",
+        "environmentTime": "8.38",
+        "fps": "52",
+        "drawCalls": "139",
+        "triangles": "153481"
+      },
+      "pixelDeviation": 49.53799911059447
+    }
+  ]
+}
